@@ -1,0 +1,250 @@
+\documentclass[a4paper,landscape]{article}
+\RequirePackage{tikz}
+\RequirePackage[overlay]{textpos}
+\setlength{\TPHorizModule}{1cm}
+\setlength{\TPVertModule}{1cm}
+
+\usepackage{unicode}
+
+%%%%%%%%%
+% Fonts %
+%%%%%%%%%
+\RequirePackage[quiet]{fontspec}
+
+\newfontfamily\bodyfont[]{HelveticaNeue LT 53 Ex}
+\newfontfamily\thinfont[]{仿宋}
+\newfontfamily\headingfont[]{黑体}
+\newfontfamily\normalfont[]{宋体}
+
+\defaultfontfeatures{Mapping=tex-text}
+\setmainfont[Mapping=tex-text, Color=textcolor]{宋体}
+
+
+%%%%%%%%%%
+% Colors %
+%%%%%%%%%%
+
+\RequirePackage{xcolor}
+
+\definecolor{white}{RGB}{255,255,255}
+
+\definecolor{darkgray}{HTML}{333333}
+\definecolor{gray}{HTML}{4D4D4D}
+\definecolor{lightgray}{HTML}{999999}
+
+\definecolor{green}{HTML}{C2E15F}
+\definecolor{orange}{HTML}{FDA333}
+\definecolor{purple}{HTML}{D3A4F9}
+\definecolor{red}{HTML}{FB4485}
+\definecolor{blue}{HTML}{6CE0F1}
+
+\colorlet{fillheader}{gray}
+\colorlet{header}{white}
+\colorlet{textcolor}{gray}
+\colorlet{headercolor}{gray}
+
+
+%%%%%%%%%%%%%
+% Structure %
+%%%%%%%%%%%%%
+\RequirePackage{parskip}
+
+\newcounter{colorCounter}
+\def\@sectioncolor#1#2{%
+  {%
+    \color{%
+      \ifcase\value{colorCounter}%
+        blue\or%
+        red\or%
+        orange\or%
+        green\or%
+        purple\or%
+        brown\else%
+        headercolor\fi%
+    } #1#2%
+  }%
+  \stepcounter{colorCounter}%
+}
+
+\renewcommand{\section}[1]{
+  \par\vspace{\baselineskip}
+  {%
+    \LARGE\headingfont\color{headercolor}%
+    \@sectioncolor #1%
+  }
+  \par\vspace{\baselineskip}
+}
+
+\renewcommand{\subsection}[2]{
+  \par\vspace{.5\baselineskip}%
+  \Large\headingfont\color{headercolor} #2%
+  \par\vspace{.25\baselineskip}%
+}
+
+\pagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%
+% List environment %
+%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\tabcolsep}{0pt}
+\newenvironment{entrylist}{%
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
+}{%
+  \end{tabular*}
+}
+\renewcommand{\bfseries}{\headingfont\color{gray}}
+\newcommand{\entry}[4]{%
+  #1&\parbox[t]{16cm}{%
+    \textbf{#2}%
+    \hfill%
+    {\footnotesize\addfontfeature{Color=lightgray} #3}\\%
+    \normalfont#4\vspace{\parsep}%
+  }\\}
+  
+\newcommand{\notitleentry}[2]{%
+  #1&\parbox[t]{16cm}{%
+    \normalfont#2%
+    \hfill\\%
+  }\\}
+
+
+\usepackage[top=0in, bottom=0in, left=0in, right=1.5cm, nohead,nofoot]{geometry}
+
+\begin{document}
+\setlength{\fboxsep}{0pt}
+ \colorbox{gray}{
+  \begin{minipage}[t][\paperheight]{0.2\paperwidth}
+    \begin{flushright}
+        \fontsize{40pt}{72pt}\color{gray}{\_\_\_}% use this to keep the two minipage at the same top height
+      \\
+        \begin{textblock}{5.5}(0.2, 3)
+        \begin{flushright}
+            \fontsize{40pt}{72pt}\color{white}%
+              {\bodyfont Soul}
+             \vspace{0.3cm}\\
+             \fontsize{14pt}{24pt}\color{white}%
+              {\thinfont 赵 翔}
+              \vspace{0.3cm}\\
+             \fontsize{10pt}{12pt}\color{white}%
+              {\thinfont 软件工程师}%
+         \end{flushright}
+        \end{textblock}
+
+        \begin{textblock}{5.5}(0.2, 15)
+        \begin{flushright}
+            \let\oldsection\section
+            \renewcommand{\section}[1]{
+                    \par\vspace{\baselineskip}{\Large\headingfont\color{white} \hfill#1}
+            }
+            
+            \section{联系方式}
+            \\
+            {\fontsize{10pt}{12pt}\color{white}+86 151 0613 7119}
+		 \\
+            {\fontsize{10pt}{12pt}\color{white}soulzx2010@gmail.com}
+		 \\
+		 {\fontsize{10pt}{12pt}\color{white}github.com/soulzhao}
+            \\
+            {\fontsize{10pt}{12pt}\color{white}苏州市工业园区}
+		  ~
+            \let\section\oldsection
+         \end{flushright}
+        \end{textblock}
+    \end{flushright}
+\end{minipage}
+}
+%
+ \colorbox{white}{
+\begin{minipage}[t][\paperheight]{0.7\paperwidth}
+    \begin{flushleft}
+
+%----------------------------------------------------------------------------------------
+%   EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+\section{教育经历}
+
+\begin{entrylist}
+%------------------------------------------------
+\entry
+{2008 -- 2012}
+{计算机科学技术学士学位}
+{苏州科技大学}
+{本科期间专业前3, GPA 3.7, 优秀毕业生杰出代表}
+%------------------------------------------------
+\end{entrylist}
+
+%----------------------------------------------------------------------------------------
+%   CAREER SECTION
+%----------------------------------------------------------------------------------------
+
+\section{职业生涯}
+
+\begin{entrylist}
+%------------------------------------------------
+\entry
+{2012 -- Now}
+{甲骨文(中国)软件系统有限公司}
+{工业园区, 苏州, 中国}
+{\emph{2年 融合人力资源管理应用工程师} \\
+负责甲骨文融合应用 -- 人力资源系统的开发工作。我主要负责成本模块的维护与开发工作，也参与商务\\智能报表模块的维护和开发。使用Java语言工作。\\}
+%------------------------------------------------
+\entry
+{2011 -- 2012}
+{旺宏微电子(苏州)有限公司 (实习)}
+{工业园区, 苏州, 中国}
+{\emph{助理软件工程师} \\
+作为助理软件工程师在此公司做实习工作。主要负责安卓系统的优化和Linux驱动开发。我当时主要负责\\的是基于安卓2.3系统平台的传感器模块的维护和开发工作。\\}
+%------------------------------------------------
+\end{entrylist}
+
+%----------------------------------------------------------------------------------------
+%   PROJECT EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+\section{项目经验}
+
+\begin{entrylist}
+%------------------------------------------------
+\entry
+{2014 -- Now}
+{电动汽车信息采集及分析系统}
+{中国科学院信息工程研究所}
+{与中科院的一位博士后合作,做为外聘专家, 负责网络相关信息的采集和分析。\\使用Python开发了一个多线程爬虫去抓取数以百计的相关网站上的特定信息。实现了一个简易线程池，\\采用XML模板定制的方法为每一个网站定制抓取内容，方便用户使用。\\}
+%------------------------------------------------
+\entry
+{2011 -- 2012}
+{城市应急道路维护及选择系统}
+{上海交通大学}
+{与该校交通学院的一位博士展开合作,共同完成这个工程。这是一个基于.NET平台的，用C\#写成的系统，\\实现了众多的算法。
+这个工具肯定根据路况信息来计算在危险情况下的道路可行性，以及为抢险队智\\能的去寻找最优路径(时间上，空间上)，为物资分发提供最优方案的系统。\\
+实现的算法包括： Dijistra算法, 蒙特卡洛算法, 遗传算法以及其他在图论中经常使用的算法。\\}
+%------------------------------------------------
+\end{entrylist}
+
+%----------------------------------------------------------------------------------------
+%	INTERESTS SECTION
+%----------------------------------------------------------------------------------------
+
+\section{自我陈述}
+\begin{entrylist}
+
+\notitleentry
+{编码能力:}
+{熟练使用Java, C\#, C/C++, Matlab, Python等语言，了解js, php, bash等。\\
+熟悉多线程编程，熟悉设计模式。算法方面，我自认为是一个能快速学习并实现算法的人。\\}
+\notitleentry
+{交流能力:}
+{良好的中英语交流能力。我可以清楚明白的用英文表述自己想法，不论是书面交流还是当面交流。在\\Oracle，我的交流能力给我的老板留下了深刻印象，尤其是书面交流能力，因为我曾是我所在大学的\\征文比赛冠军。\\}
+\notitleentry
+{自我评价:}
+{我认为我是一个能快速学习，并且能快速上手各种工作的人，我能通过各种方面解决工作中的问题。\\同时，我也是一个负责任的，专注的人。\\}
+
+
+\end{entrylist}
+
+    \end{flushleft}
+\end{minipage}
+}
+\end{document}

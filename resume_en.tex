@@ -1,0 +1,231 @@
+\documentclass[a4paper,landscape]{article}
+\RequirePackage{tikz}
+\RequirePackage[overlay]{textpos}
+\setlength{\TPHorizModule}{1cm}
+\setlength{\TPVertModule}{1cm}
+
+%%%%%%%%%
+% Fonts %
+%%%%%%%%%
+\RequirePackage[quiet]{fontspec}
+\RequirePackage[math-style=TeX,vargreek-shape=unicode]{unicode-math}
+
+\newfontfamily\bodyfont[]{HelveticaNeue LT 53 Ex}
+\newfontfamily\thinfont[]{HelveticaNeue LT 23 UltLtEx}
+\newfontfamily\headingfont[]{Elephant}
+\newfontfamily\normalfont[]{Calibri}
+
+\defaultfontfeatures{Mapping=tex-text}
+\setmainfont[Mapping=tex-text, Color=textcolor]{HelveticaNeue LT 23 UltLtEx}
+
+
+%%%%%%%%%%
+% Colors %
+%%%%%%%%%%
+
+\RequirePackage{xcolor}
+
+\definecolor{white}{RGB}{255,255,255}
+
+\definecolor{darkgray}{HTML}{333333}
+\definecolor{gray}{HTML}{4D4D4D}
+\definecolor{lightgray}{HTML}{999999}
+
+\definecolor{green}{HTML}{C2E15F}
+\definecolor{orange}{HTML}{FDA333}
+\definecolor{purple}{HTML}{D3A4F9}
+\definecolor{red}{HTML}{FB4485}
+\definecolor{blue}{HTML}{6CE0F1}
+
+\colorlet{fillheader}{gray}
+\colorlet{header}{white}
+\colorlet{textcolor}{gray}
+\colorlet{headercolor}{gray}
+
+
+%%%%%%%%%%%%%
+% Structure %
+%%%%%%%%%%%%%
+\RequirePackage{parskip}
+
+\newcounter{colorCounter}
+\def\@sectioncolor#1#2#3{%
+  {%
+    \color{%
+      \ifcase\value{colorCounter}%
+        blue\or%
+        red\or%
+        orange\or%
+        green\or%
+        purple\or%
+        brown\else%
+        headercolor\fi%
+    } #1#2#3%
+  }%
+  \stepcounter{colorCounter}%
+}
+
+\renewcommand{\section}[1]{
+  \par\vspace{\baselineskip}
+  {%
+    \LARGE\headingfont\color{headercolor}%
+    \@sectioncolor #1%
+  }
+  \par\vspace{\baselineskip}
+}
+
+\renewcommand{\subsection}[2]{
+  \par\vspace{.5\baselineskip}%
+  \Large\headingfont\color{headercolor} #2%
+  \par\vspace{.25\baselineskip}%
+}
+
+\pagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%
+% List environment %
+%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\tabcolsep}{0pt}
+\newenvironment{entrylist}{%
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
+}{%
+  \end{tabular*}
+}
+\renewcommand{\bfseries}{\headingfont\color{gray}}
+\newcommand{\entry}[4]{%
+  #1&\parbox[t]{16cm}{%
+    \textbf{#2}%
+    \hfill%
+    {\footnotesize\addfontfeature{Color=lightgray} #3}\\%
+    \normalfont#4\vspace{\parsep}%
+  }\\}
+  
+\newcommand{\notitleentry}[2]{%
+  #1&\parbox[t]{16cm}{%
+    \normalfont#2%
+    \hfill\\%
+  }\\}
+
+
+\usepackage[top=0in, bottom=0in, left=0in, right=1.5cm, nohead,nofoot]{geometry}
+
+\begin{document}
+\setlength{\fboxsep}{0pt}
+ \colorbox{gray}{
+  \begin{minipage}[t][\paperheight]{0.2\paperwidth}
+    \begin{flushright}
+        \fontsize{40pt}{72pt}\color{gray}{\_\_\_}% use this to keep the two minipage at the same top height
+      \\
+        \begin{textblock}{5.5}(0.2, 3)
+        \begin{flushright}
+            \fontsize{40pt}{72pt}\color{white}%
+              {\bodyfont Soul}
+             \vspace{0.3cm}\\
+             \fontsize{14pt}{24pt}\color{white}%
+              {\thinfont Zhao Xiang}
+              \vspace{0.3cm}\\
+             \fontsize{10pt}{12pt}\color{white}%
+              {\thinfont Software Application Engineer}%
+         \end{flushright}
+        \end{textblock}
+
+        \begin{textblock}{5.5}(0.2, 15)
+        \begin{flushright}
+            \let\oldsection\section
+            \renewcommand{\section}[1]{
+                    \par\vspace{\baselineskip}{\Large\headingfont\color{white} \hfill#1}
+            }
+            
+            \section{Contact}
+            \\
+            {\fontsize{10pt}{12pt}\color{white}+86 151 0613 7119}
+		        \\
+            {\fontsize{10pt}{12pt}\color{white}soulzx2010@gmail.com}
+            \\
+            {\fontsize{10pt}{12pt}\color{white}github.com/soulzhao}
+            \\            
+            {\fontsize{10pt}{12pt}\color{white}Industry Park, Suzhou}
+		  ~
+            \let\section\oldsection
+         \end{flushright}
+        \end{textblock}
+    \end{flushright}
+\end{minipage}%
+}
+%
+ \colorbox{white}{
+\begin{minipage}[t][\paperheight]{0.7\paperwidth}
+    \begin{flushleft}
+%----------------------------------------------------------------------------------------
+%   EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+\section{Education}
+\begin{entrylist}
+%------------------------------------------------
+\entry
+{2008 -- 2012}
+{Bachelor of Computer Science}
+{University of Science and Technology of Suzhou}
+{Top 3 of the Computer Science and Technology department, and was selected as the best graduate representative for graduation ceremony.}
+%------------------------------------------------
+\end{entrylist}
+%----------------------------------------------------------------------------------------
+%   CAREER SECTION
+%----------------------------------------------------------------------------------------
+\section{Career}
+\begin{entrylist}
+%------------------------------------------------
+\entry
+{2012 -- Now}
+{Oracle (China) Software System Co., Ltd}
+{Suzhou, China}
+{\emph{2 Years Fusion HCM Application Engineer} \\
+Major in the development of Oralce’s Saas Product -- Fusion HCM system. I was in charge of the development and maintenance of the Costing module, and sometimes I would help on the BI Report module. Mainly use Java as the programming language. The youngest one that won the quarterly stars price(FY13, Q4) of Oracle CDC. \\}
+%------------------------------------------------
+\entry
+{2011 -- 2012}
+{Macronix (Suzhou) Co., Ltd   (Internship)}
+{Suzhou, China}
+{\emph{Associate Software Engineer} \\
+Worked as an associate application engineer here for internship. Major in Android System optimization and linux driver development. I was in charge of the maintenance and development of the Sensor system on Android 2.3.\\}
+%------------------------------------------------
+\end{entrylist}
+%----------------------------------------------------------------------------------------
+%   PROJECT EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+\section{Projects}
+\begin{entrylist}
+%------------------------------------------------
+\entry
+{2014 -- Now}
+{Electric Vehicle Information Gathering\&Analysis System}
+{Institute Of Information Engineering, CAS}
+{Cooperated with a post-doctoral in CAS, I, as a specialist for this National Project, am in charge of the information gathering and analysis. Using python, I wrote a spider to crawl hundreds of related websites to get specified information. I also impelemented a simple thread-pool to support multi-threads and use XML templates I defined the page structure to help customize the crawling. \\}
+%------------------------------------------------
+\entry
+{2011 -- 2012}
+{City Roads Maintenance\&Selection System For Emergency}
+{Shanghai Jiao Tong University}
+{Cooperated with a doctor in Shanghai Jiao Tong University, we worked together to finish this project. This is a C\# written program that contains many algorithms which could help not only simulate the real road conditions but also determine the right path for emergency. The algorithms I used are Dijistra Algorithm, MentoCarlo Algorithm, Genetic Algorithm and other frequently used algorithms for Graph data struture.\\}
+%------------------------------------------------
+\end{entrylist}
+%----------------------------------------------------------------------------------------
+%	INTERESTS SECTION
+%----------------------------------------------------------------------------------------
+\section{Presentation}
+\begin{entrylist}
+\notitleentry
+{Coding Skills:}
+{I can use languages like Java, C\#, C/C++, Matlab, Python and so on (js, php, bash ...) to quickly complete the programming tasks. I'm familiar with Multi-threading, Design patterns and DB related knowledge. For algorithms, I take myself as a very quick learner and can pick up any algorithms in a short time.\\}
+\notitleentry
+{Communication Skills:}
+{Good English commnunication skills, I can clearly express my ideas through writing and verbal communication.My communication skills leave a great impression on my current boss.\\}
+\notitleentry
+{Self-evaluation:}
+{I consider myself as :A man who can quickly startup and being assigned to different tasks, A man who can learn things fast and is capable of resolving various issues, A man who is responsible and dedicated to his job.\\}
+\end{entrylist}
+    \end{flushleft}
+\end{minipage}%
+}
+\end{document}
